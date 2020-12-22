@@ -11,7 +11,7 @@ public class MyController {
         return "hello "+name;
     }
     @GetMapping("/exception")
-    public void getException(){
+    public void getException(@RequestParam(defaultValue = "unknown") String name){
         throw new RuntimeException("sadeq launched this");
     }
 }

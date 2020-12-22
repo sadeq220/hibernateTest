@@ -10,4 +10,5 @@ import java.util.List;
 public interface MyRepository extends JpaRepository<Lname,Integer> {
     @Override
     List<Lname> findAll();
+
 }
