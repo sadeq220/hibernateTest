@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.util.NestedServletException;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,7 +35,7 @@ class DemoApplicationTests {
     @Test
     void contextLoads() throws Exception{
         Assertions.assertThat(myController).isNotNull();
-        mvc.perform(get("/home?name=sadeq")).andDo(print()).andExpect(status().is(200))
+        mvc.perform(get("/home").param("name","sadeq")).andDo(print()).andExpect(status().is(200))
                 .andExpect(content().string(containsString("hello sadeq")));
     }
     @Test
@@ -42,6 +44,6 @@ class DemoApplicationTests {
     }
     @Test
     void TestException() throws Exception{
-        org.junit.jupiter.api.Assertions.assertThrows(RuntimeException.class,()->{mvc.perform(get("/exception"));});
+        org.junit.jupiter.api.Assertions.assertThrows(NestedServletException.class,()->{mvc.perform(get("/exception"));});
     }
 }
