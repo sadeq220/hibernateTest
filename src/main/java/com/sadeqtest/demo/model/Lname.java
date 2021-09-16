@@ -1,9 +1,11 @@
 package com.sadeqtest.demo.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.SQLInsert;
+
+import javax.annotation.Priority;
+import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "lName")
@@ -13,6 +15,27 @@ public class Lname {
     private String lname;
     @Column(name = "GP")
     private Integer group;
+
+    @OneToOne(mappedBy = "lname")
+    @PrimaryKeyJoinColumn
+    private Address address;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Lname() {
+    }
+
+    public Lname(Integer id, String lname, Integer group) {
+        this.id=id;
+        this.lname=lname;
+        this.group=group;
+    }
 
     public Integer getId() {
         return id;
@@ -36,5 +59,9 @@ public class Lname {
 
     public void setGroup(Integer group) {
         this.group = group;
+    }
+
+    public static void main(String[] args) {
+        ArrayList<String> strings = new ArrayList<>();
     }
 }

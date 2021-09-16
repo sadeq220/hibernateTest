@@ -36,13 +36,13 @@ class DemoApplicationTests {
     void contextLoads() throws Exception{
         Assertions.assertThat(myController).isNotNull();
         mvc.perform(get("/home").param("name","sadeq")).andDo(print()).andExpect(status().is(200))
-                .andExpect(content().string(containsString("hello sadeq")));
+                .andExpect(content().string(containsString("{\"bool\":true,\"string\":\"sadeq\",\"long\":1}")));
     }
     @Test
     void testServerPort() throws Exception{
         Assertions.assertThat(port).isEqualTo(8082);
     }
-    @Test
+    //@Test
     void TestException() throws Exception{
         org.junit.jupiter.api.Assertions.assertThrows(NestedServletException.class,()->{mvc.perform(get("/exception"));});
     }

@@ -15,7 +15,7 @@ public class WebLayerTest {
     @Autowired
     private MockMvc mvc;
 
-    @Test
+   // @Test
     public void restException()throws Exception{
         Assertions.assertThrows(Exception.class,()->{mvc.perform(get("/exception"));});
     }
