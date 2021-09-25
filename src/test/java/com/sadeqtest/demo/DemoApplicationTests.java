@@ -1,6 +1,9 @@
 package com.sadeqtest.demo;
 
 import com.sadeqtest.demo.controller.MyController;
+import com.sadeqtest.demo.repository.UserDomainRepo;
+import com.sadeqtest.demo.securityDomain.LegalUserDomain;
+import com.sadeqtest.demo.securityDomain.UserTestDomain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -31,6 +34,8 @@ class DemoApplicationTests {
 
     @Autowired
     private MockMvc mvc;
+    @Autowired
+    private UserDomainRepo userRepo;
 
     @Test
     void contextLoads() throws Exception{
@@ -45,5 +50,22 @@ class DemoApplicationTests {
     //@Test
     void TestException() throws Exception{
         org.junit.jupiter.api.Assertions.assertThrows(NestedServletException.class,()->{mvc.perform(get("/exception"));});
+    }
+    UserTestDomain buildUser(){
+        UserTestDomain userTestDomain = new UserTestDomain();
+        userTestDomain.setName("sadeq");
+        userTestDomain.setPassword("123456");
+        userTestDomain.setUsername("sadeq220");
+        return userTestDomain;
+    }
+    UserTestDomain buildLegalUser(){
+        LegalUserDomain userTestDomain = new LegalUserDomain();
+        userTestDomain.setName("sadeq");
+        userTestDomain.setPassword("123456");
+        userTestDomain.setUsername("sadeq220");
+        userTestDomain.setNationalCode("4322230994");
+        userTestDomain.setRealLastName("queue");
+        userTestDomain.setRealName("ms");
+        return userTestDomain;
     }
 }
