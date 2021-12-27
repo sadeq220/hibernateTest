@@ -1,25 +1,25 @@
 package com.sadeqtest.demo.securityDomain;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class UserTestDomain {
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name="system-uuid",strategy = "uuid2")
-    private String userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userId;
+    @NotNull
     private String name;
+    @Column(name = "PSSSWD")
     private String password;
     private String username;
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

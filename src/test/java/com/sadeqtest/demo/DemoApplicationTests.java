@@ -60,7 +60,7 @@ class DemoApplicationTests {
     }
     UserTestDomain buildLegalUser(){
         LegalUserDomain userTestDomain = new LegalUserDomain();
-        userTestDomain.setName("sadeq");
+        //userTestDomain.setName("sadeq");
         userTestDomain.setPassword("123456");
         userTestDomain.setUsername("sadeq220");
         userTestDomain.setNationalCode("4322230994");
