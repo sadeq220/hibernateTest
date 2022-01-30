@@ -4,7 +4,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "comment")
 @Table(name = "COMMENT")
 public class Comment {
     @Id
@@ -13,4 +13,7 @@ public class Comment {
     @Column(name = "TEXT",columnDefinition = "VARCHAR(150)")
     @Length(max = 150)
     private String text;
+    @ManyToOne
+    @JoinColumn(name = "POST_ID")
+    private Post post;
 }

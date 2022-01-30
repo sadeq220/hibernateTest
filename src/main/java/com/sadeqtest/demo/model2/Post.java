@@ -13,5 +13,22 @@ public class Post {
     private String postId;
     @Column(name = "LIKES")
     private Long likes;
+    public Post(){
+        // default constructor to comply with POJO
+    }
+    public String getPostId() {
+        return postId;
+    }
 
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
+
+    public Long getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Long likes) {
+        this.likes = likes;
+    }
 }

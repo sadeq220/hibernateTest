@@ -1,6 +1,8 @@
 package com.sadeqtest.demo;
 
 import com.sadeqtest.demo.controller.MyController;
+import com.sadeqtest.demo.repository.AddressRepo;
+import com.sadeqtest.demo.repository.EntityManagerDao;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -31,7 +33,14 @@ class DemoApplicationTests {
 
     @Autowired
     private MockMvc mvc;
-
+    @Autowired
+    private AddressRepo addressRepo;
+    @Autowired
+    private EntityManagerDao entityManagerDao;
+    @Test
+    void savePost(){
+        entityManagerDao.savePost(56L);
+    }
     @Test
     void contextLoads() throws Exception{
         Assertions.assertThat(myController).isNotNull();

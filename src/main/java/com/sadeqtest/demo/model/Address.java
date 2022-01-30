@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
-@Entity(name = "adr")
+@Entity(name = "address")
 public class Address {
     @Id
     @Column(name = "user_id")
     private Integer id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @MapsId
     @JoinColumn(name = "user_id")
     private Lname lname;
