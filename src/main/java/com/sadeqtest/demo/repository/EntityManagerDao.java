@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
+import java.util.function.Consumer;
 
 @Repository
 public class EntityManagerDao {
@@ -35,6 +36,10 @@ public class EntityManagerDao {
         Post post = new Post();
         post.setLikes(likes);
         return session.save(post);
+    }
+    @Transactional
+    public void doInJpa(Consumer<EntityManager> consumer){
+        consumer.accept(entityManager);
     }
 
     /**

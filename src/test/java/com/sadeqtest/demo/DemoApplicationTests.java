@@ -1,6 +1,8 @@
 package com.sadeqtest.demo;
 
 import com.sadeqtest.demo.controller.MyController;
+import com.sadeqtest.demo.model3.ApplicationUser;
+import com.sadeqtest.demo.model3.Link;
 import com.sadeqtest.demo.repository.AddressRepo;
 import com.sadeqtest.demo.repository.EntityManagerDao;
 import org.assertj.core.api.Assertions;
@@ -50,6 +52,16 @@ class DemoApplicationTests {
     @Test
     void testServerPort() throws Exception{
         Assertions.assertThat(port).isEqualTo(8082);
+    }
+    @Test
+    void saveLink(){
+        entityManagerDao.doInJpa(entityManager -> {
+            ApplicationUser applicationUser=entityManager.find(ApplicationUser.class,"sadeq220");
+            Link link=new Link();
+            link.setDescription("second link for testing");
+            link.setLinkOwner(applicationUser);
+            applicationUser.addLink(link);
+        });
     }
     //@Test
     void TestException() throws Exception{
