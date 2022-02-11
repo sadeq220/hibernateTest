@@ -5,15 +5,9 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.SortNatural;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 @Entity
 public class ApplicationUser implements Serializable,Cloneable {
@@ -23,7 +17,8 @@ public class ApplicationUser implements Serializable,Cloneable {
     @ManyToMany(mappedBy = "applicationUsers",cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @SortNatural
     private SortedSet<Link> linkSet=new TreeSet<>();
-
+    @Transient
+    private SortedSet<Link> linkSetCounterpart;
     @Override
     public boolean equals(Object obj) {
         if(this==obj)
@@ -43,6 +38,16 @@ public class ApplicationUser implements Serializable,Cloneable {
         return hashCodeBuilder.toHashCode();
     }
 
+    /**
+     * entity life cycle events,and corresponding callback methods
+     * JPA @PostLoad : Executed after an entity has been loaded into the current persistence context
+     *                 or an entity has been refreshed.
+     */
+    @PostLoad
+    private void populateCounterpartSet(){
+        this.linkSetCounterpart =Collections.unmodifiableSortedSet(linkSet);
+    }
+
     public String getUsername() {
         return username;
     }
@@ -59,8 +64,8 @@ public class ApplicationUser implements Serializable,Cloneable {
         this.password = password;
     }
 
-    public SortedSet<Link> getLinkSet() {
-        return linkSet;
+    public SortedSet<Link> getUnmodifiableLinkSet() {
+        return linkSetCounterpart;
     }
 
     public void addLink(Link link){
