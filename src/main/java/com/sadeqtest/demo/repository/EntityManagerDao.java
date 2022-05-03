@@ -41,7 +41,10 @@ public class EntityManagerDao {
     public void doInJpa(Consumer<EntityManager> consumer){
         consumer.accept(entityManager);
     }
-
+    @Transactional
+    public void doInHibernate(Consumer<Session> consumer){
+        consumer.accept(session);
+    }
     /**
      * use default fetch plan to inject outer join into our query
      */
