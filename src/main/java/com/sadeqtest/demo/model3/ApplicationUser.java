@@ -73,6 +73,10 @@ public class ApplicationUser implements Serializable,Cloneable {
         link.addApplicationUser(this);
     }
 
+    public void removeLink(Link link){
+        linkSet.remove(link);
+    }
+
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();

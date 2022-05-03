@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -77,7 +74,7 @@ public class MyController {
         ClassPathResource resource=new ClassPathResource("/static/image.jpg");
         InputStreamResource streamResource=new InputStreamResource(resource.getInputStream());
         HttpHeaders headers=new HttpHeaders();
-        headers.add("Content-Disposition",String.format("attachment ; filename=\"%s\"",resource.getFilename()));
+        headers.setContentDisposition(ContentDisposition.attachment().filename(resource.getFilename()).build());
         headers.add("Cache-Control","no-cache, no-store, must-revalidate");
         headers.add("Pragma","no-cache");
         headers.add("Expires","0");
