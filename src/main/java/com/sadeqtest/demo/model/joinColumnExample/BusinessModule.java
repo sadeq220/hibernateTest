@@ -1,4 +1,4 @@
-package com.sadeqtest.demo.model.ordinary;
+package com.sadeqtest.demo.model.joinColumnExample;
 
 import javax.persistence.*;
 
