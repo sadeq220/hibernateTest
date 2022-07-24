@@ -15,7 +15,7 @@ public class BusinessModule {
     @JoinColumn(name = "namespace")
     /**
      * joinColumn just Specifies a column for joining an entity association or element collection.
-     * if you want your joining column( typically foreign key) event on lazy loading just add column to your entity with
+     * if you want your joining column( typically foreign key) even on lazy loading just add column to your entity with
      *  updatable = false
      *  insertable = false
      *  just to assure a JPA about referential integrity
